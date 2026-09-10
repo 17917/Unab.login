@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universidad Dr. Andrés Bello - Iniciar Sesión</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* Sustituye la URL por tu imagen de fondo */
+      background: url ('file:///FONDOUNAB.png') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    /* Capa translúcida opcional sobre el fondo */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+
+    /* Contenedor principal */
+    .wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+    }
+
+    /* Tarjeta del formulario */
+    .login-card {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 490px;
+      padding: 35px 30px;
+      text-align: center;
+    }
+
+    /* Logo institucional */
+    .logo-container {
+      margin-bottom: 30px;
+    }
+
+    .logo-container img {
+      max-width: 320px;
+      height: auto;
+    }
+
+    /* Formulario e Inpust */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #d0d5dd;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #333;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-control::placeholder {
+      color: #98a2b3;
+    }
+
+    .form-control:focus {
+      border-color: #246346;
+    }
+
+    /* Botón verde de acceso */
+    .btn-submit {
+      width: 100%;
+      background-color: #246346;
+      color: #ffffff;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 5px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-submit:hover {
+      background-color: #1c4e37;
+    }
+
+    /* Enlace de Google */
+    .extra-link {
+      margin-top: 25px;
+    }
+
+    .extra-link a {
+      color: #1d4ed8;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .extra-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Botón/Selector de Idioma inferior */
+    .lang-selector {
+      margin-top: 25px;
+    }
+
+    .btn-lang {
+      background-color: rgba(51, 65, 85, 0.85);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+
+    .btn-lang:hover {
+      background-color: rgba(30, 41, 59, 0.95);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <!-- Card de Login -->
+    <div class="login-card">
+      <div class="logo-container">
+        <!-- Reemplaza src por la ruta de tu logo -->
+        <img src="LOGOUNAB.png">
+      </div>
+
+      <form>
+        <div class="form-group">
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Nombre de usuario o correo electrónico" 
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <input 
+            type="password" 
+            class="form-control" 
+            placeholder="Contraseña" 
+            required
+          >
+        </div>
+
+        <button type="submit" class="btn-submit">Acceder</button>
+      </form>
+
+      <div class="extra-link">
+        <a href="#">Volver al acceso con Google</a>
+      </div>
+    </div>
+
+    <!-- Botón de idioma -->
+    <div class="lang-selector">
+      <button type="button" class="btn-lang">Español - Internacional (es)</button>
+    </div>
+  </div>
+
+</body>
+</html>

